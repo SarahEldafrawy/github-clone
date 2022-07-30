@@ -5,6 +5,17 @@ export default class AppColor {
   // TODO: Just an example. Each screen should be have an instance with its custom colors
   public test = {}
 
+  public home = {
+    background: palette.black.base,
+    text: palette.white.base,
+  }
+
+  public search = {
+    background: palette.black.smoke,
+    text: palette.white.base,
+    placeholder: palette.grey.base,
+  }
+
   public activityIndicator = palette.white.base
 
   public ripple = palette.grey.base
