@@ -4,7 +4,7 @@ import { AppRoute } from "@github/navigation/routes"
 
 export type IRootParamList = {
   [AppRoute.Home]: undefined
-  [AppRoute.SearchResult]: { title: string }
+  [AppRoute.SearchResult]: { title: string; searchText: string }
 }
 
 type IRootRoute = keyof IRootParamList
