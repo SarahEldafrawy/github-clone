@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FlatList } from "react-native"
 import { StatusBar } from "@github-shared"
-import { searchAction, searchResult } from "@github/state"
+import { searchAction, searchResult, clearResult } from "@github/state"
 import { ISearchResultProps } from "./search-result.props"
 import { Wrapper, StyledView } from "./search-result.styles"
 import { Header, Card } from "./components"
@@ -13,6 +13,7 @@ const SearchResult = ({ navigation, route }: ISearchResultProps): JSX.Element =>
   const result = useSelector(searchResult)
 
   useEffect(() => {
+    // TODO sarah: create navigation and state enums for people and organization
     if (title === "Organizations") {
       dispatch(searchAction({ searchString: searchText, type: "org" }))
     } else {
@@ -26,8 +27,7 @@ const SearchResult = ({ navigation, route }: ISearchResultProps): JSX.Element =>
   }
 
   const clearState = () => {
-    console.log("clear")
-    // dispatch(clearSearchAction())
+    dispatch(clearResult())
   }
 
   return (
