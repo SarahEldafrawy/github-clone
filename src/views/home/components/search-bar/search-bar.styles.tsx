@@ -33,6 +33,6 @@ export const Input = styled.TextInput`
   font-size: ${R.fontSize.big}px;
   text-align: left;
   flex-grow: 1;
-  text-decoration: underline;
+  text-decoration: ${(props) => (props?.value?.length === 0 ? "none" : "underline")};
   text-decoration-color: ${R.color.search.text};
 `

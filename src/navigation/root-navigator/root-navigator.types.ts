@@ -2,9 +2,14 @@ import { RouteProp } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { AppRoute } from "@github/navigation/routes"
 
+export enum SearchNavigation {
+  People = "People",
+  Organization = "Organization",
+}
+
 export type IRootParamList = {
   [AppRoute.Home]: undefined
-  [AppRoute.SearchResult]: { title: string; searchText: string }
+  [AppRoute.SearchResult]: { title: SearchNavigation; searchText: string }
 }
 
 type IRootRoute = keyof IRootParamList

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FlatList } from "react-native"
 import { StatusBar } from "@github-shared"
@@ -8,7 +8,10 @@ import {
   searchResultHasMore,
   searchResultPage,
   clearResult,
+  searchLoading,
+  SearchType,
 } from "@github/state"
+import { SearchNavigation } from "@github/navigation/root-navigator"
 import { ISearchResultProps } from "./search-result.props"
 import { Wrapper, StyledView } from "./search-result.styles"
 import { Header, Card } from "./components"
@@ -19,21 +22,15 @@ const SearchResult = ({ navigation, route }: ISearchResultProps): JSX.Element =>
   const result = useSelector(searchResult)
   const hasMore = useSelector(searchResultHasMore)
   const page = useSelector(searchResultPage)
-  const [loading, setLoading] = useState(false)
+  const loading = useSelector(searchLoading)
 
   const fetchData = () => {
-    setLoading(true)
-    // TODO sarah: create navigation and state enums for people and organization
-    if (title === "Organizations") {
-      dispatch(searchAction({ searchString: searchText, type: "org", page }))
+    if (title === SearchNavigation.Organization) {
+      dispatch(searchAction({ searchString: searchText, type: SearchType.Organization, page }))
     } else {
-      dispatch(searchAction({ searchString: searchText, type: "user", page }))
+      dispatch(searchAction({ searchString: searchText, type: SearchType.User, page }))
     }
   }
-
-  useEffect(() => {
-    setLoading(false)
-  }, [page])
 
   useEffect(() => {
     fetchData()

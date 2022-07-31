@@ -8,6 +8,10 @@ export interface ISearchResultPayload {
   }>
 }
 
+export interface ISearchLoadingPayload {
+  loading: boolean
+}
+
 export interface ISearchState {
   result: Array<{
     id: string
@@ -18,4 +22,10 @@ export interface ISearchState {
   }>
   hasMore: boolean
   page: number
+  loading: boolean
+}
+
+export enum SearchType {
+  User = "user",
+  Organization = "org",
 }

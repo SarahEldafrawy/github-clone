@@ -4,7 +4,7 @@ import _ from "lodash"
 import { SagaManager } from "@github/state/ducks/shared"
 import { searchEndpoint, IResponse, ISearchPayload } from "@github/services"
 import { ExtractActionType } from "@github/utils"
-import { ISearchState, ISearchResultPayload } from "./search.types"
+import { ISearchState, ISearchResultPayload, ISearchLoadingPayload } from "./search.types"
 
 // actions
 export const searchAction = createAction(
@@ -19,6 +19,7 @@ const initialState: ISearchState = {
   result: [],
   hasMore: true,
   page: 1,
+  loading: false,
 }
 
 const searchSlice = createSlice({
@@ -38,15 +39,19 @@ const searchSlice = createSlice({
       state.page = 1
       state.hasMore = true
     },
+    setSearchLoading: (state, { payload: { loading } }: PayloadAction<ISearchLoadingPayload>) => {
+      state.loading = loading
+    },
   },
 })
 
-export const { setSearchResult, clearResult } = searchSlice.actions
+export const { setSearchResult, clearResult, setSearchLoading } = searchSlice.actions
 export const searchReducerName = searchSlice.name
 export default searchSlice.reducer
 
 // Saga
 function* prepare({ payload: { q, page } }: ExtractActionType<typeof searchAction>) {
+  yield put(setSearchLoading({ loading: true }))
   return {
     q,
     page,
@@ -56,6 +61,7 @@ function* prepare({ payload: { q, page } }: ExtractActionType<typeof searchActio
 function* postRequest(response: IResponse<ISearchPayload>) {
   if (response.ok) {
     yield put(setSearchResult(response.data))
+    yield put(setSearchLoading({ loading: false }))
   }
   return response
 }

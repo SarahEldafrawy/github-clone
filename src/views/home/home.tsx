@@ -4,17 +4,18 @@ import { FlatList } from "react-native-gesture-handler"
 import { Spacer, StatusBar } from "@github-shared"
 import { R } from "@github/res"
 import { AppRoute } from "@github/navigation/routes"
+import { SearchNavigation } from "@github/navigation/root-navigator"
 import { IHomeProps } from "./home.props"
 import { Wrapper, StyledContainer, StyledText, TextContainer, Options } from "./home.styles"
 import { SearchBar, Card } from "./components"
 
 const optionsData = [
   {
-    title: "Organizations",
+    title: SearchNavigation.Organization,
     source: R.image.organization,
   },
   {
-    title: "People",
+    title: SearchNavigation.People,
     source: R.image.people,
   },
 ]
