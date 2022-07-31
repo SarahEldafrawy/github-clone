@@ -19,3 +19,10 @@ export const StyledContainer = styled(Container)`
 export const TextContainer = styled.View`
   padding-bottom: 150px;
 `
+
+export const Options = styled.View`
+  position: absolute;
+  width: 100%;
+  margin-top: 90px;
+  background-color: ${R.color.search.background};
+`

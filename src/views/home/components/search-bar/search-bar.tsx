@@ -5,14 +5,15 @@ import { ISearchBarProps } from "./search-bar.props"
 import { StyledContainer, Icon, StyledText, Input, InputWrapper } from "./search-bar.styles"
 
 const SearchBar = ({
-  navigation,
   isSearchOpen,
   setIsSearchOpen,
   text,
   setText,
 }: ISearchBarProps): JSX.Element => {
-  console.log(navigation)
-  const closeSearch = () => setIsSearchOpen(false)
+  const closeSearch = () => {
+    clearSearch()
+    setIsSearchOpen(false)
+  }
   const search = () => (isSearchOpen ? clearSearch() : setIsSearchOpen(true))
 
   const clearSearch = () => {
@@ -30,6 +31,7 @@ const SearchBar = ({
             <Input
               placeholderTextColor={R.color.search.placeholder}
               autoFocus
+              // eslint-disable-next-line react-native/no-inline-styles
               style={{ textDecorationLine: text.length === 0 ? "none" : "underline" }}
               placeholder={R.string.search.placeholder}
               autoCapitalize="none"
