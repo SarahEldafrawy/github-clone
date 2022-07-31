@@ -13,7 +13,6 @@ export const Wrapper = styled.View`
   flex-direction: row;
   padding: 15px;
   height: 70px;
-  background-color: ${R.color.search.background};
 `
 
 export const Icon = styled(FitImage)`

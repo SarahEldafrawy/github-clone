@@ -1,6 +1,6 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { takeLatest, put } from "redux-saga/effects"
-import { SagaManager } from "@github/state"
+import { SagaManager } from "@github/state/ducks/shared"
 import { searchEndpoint, IResponse, ISearchPayload } from "@github/services"
 import { ExtractActionType } from "@github/utils"
 import { ISearchState, ISearchResultPayload } from "./search.types"

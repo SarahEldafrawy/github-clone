@@ -3,7 +3,7 @@ import { R } from "@github/res"
 import { Container } from "@github-shared"
 
 export const Wrapper = styled(Container)`
-  background-color: ${R.color.background};
+  background-color: ${R.color.search.background};
 `
 
 export const StyledView = styled.View`

@@ -31,6 +31,7 @@ const SearchBar = ({
             <Input
               placeholderTextColor={R.color.search.placeholder}
               autoFocus
+              // todo sarah, find a fix
               // eslint-disable-next-line react-native/no-inline-styles
               style={{ textDecorationLine: text.length === 0 ? "none" : "underline" }}
               placeholder={R.string.search.placeholder}

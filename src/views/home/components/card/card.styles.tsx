@@ -10,6 +10,7 @@ export const StyledText = styled(Text)`
 
 export const UnderlinedText = styled(Text)`
   text-decoration: underline;
+  text-decoration-color: ${R.color.search.text};
 `
 
 export const Wrapper = styled.View`

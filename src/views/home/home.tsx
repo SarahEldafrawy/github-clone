@@ -1,11 +1,23 @@
 import React, { useState } from "react"
 import { TouchableWithoutFeedback, Keyboard } from "react-native"
-import { Spacer, StatusBar, ScrollContainer } from "@github-shared"
+import { FlatList } from "react-native-gesture-handler"
+import { Spacer, StatusBar } from "@github-shared"
 import { R } from "@github/res"
 import { AppRoute } from "@github/navigation/routes"
 import { IHomeProps } from "./home.props"
 import { Wrapper, StyledContainer, StyledText, TextContainer, Options } from "./home.styles"
 import { SearchBar, Card } from "./components"
+
+const optionsData = [
+  {
+    title: "Organizations",
+    source: R.image.organization,
+  },
+  {
+    title: "People",
+    source: R.image.people,
+  },
+]
 
 const Home = ({ navigation }: IHomeProps): JSX.Element => {
   const [isSearchOpen, setSearchOpen] = useState<boolean>(false)
@@ -34,27 +46,19 @@ const Home = ({ navigation }: IHomeProps): JSX.Element => {
         </Wrapper>
         {text.length !== 0 && (
           <Options>
-            <ScrollContainer>
-              <Card
-                text={text}
-                title="Organizations"
-                source={R.image.organization}
-                onPress={() =>
+            <FlatList
+              data={optionsData.map((elem) => ({
+                ...elem,
+                text,
+                onPress: () =>
                   navigation.push(AppRoute.SearchResult, {
-                    title: "Organizations",
+                    title: elem.title,
                     searchText: text,
-                  })
-                }
-              />
-              <Card
-                text={text}
-                title="People"
-                source={R.image.people}
-                onPress={() =>
-                  navigation.push(AppRoute.SearchResult, { title: "People", searchText: text })
-                }
-              />
-            </ScrollContainer>
+                  }),
+              }))}
+              renderItem={Card}
+              keyExtractor={(item) => item.title}
+            />
           </Options>
         )}
       </>
