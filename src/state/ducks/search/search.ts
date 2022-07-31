@@ -1,5 +1,6 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { takeLatest, put } from "redux-saga/effects"
+import _ from "lodash"
 import { SagaManager } from "@github/state/ducks/shared"
 import { searchEndpoint, IResponse, ISearchPayload } from "@github/services"
 import { ExtractActionType } from "@github/utils"
@@ -8,14 +9,16 @@ import { ISearchState, ISearchResultPayload } from "./search.types"
 // actions
 export const searchAction = createAction(
   "search",
-  ({ searchString, type }: { searchString: string; type: string }) => ({
-    payload: { q: `${searchString} type:${type}` },
+  ({ searchString, type, page }: { searchString: string; type: string; page: number }) => ({
+    payload: { q: `${searchString} type:${type}`, page },
   }),
 )
 
 // Reducer
 const initialState: ISearchState = {
   result: [],
+  hasMore: true,
+  page: 1,
 }
 
 const searchSlice = createSlice({
@@ -23,10 +26,17 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setSearchResult: (state, { payload: { items } }: PayloadAction<ISearchResultPayload>) => {
-      state.result = [...state.result, ...items]
+      if (items.length > 0) {
+        state.result = _.uniqBy([...state.result, ...items], "id") //api returns duplicate elements
+        state.page++
+      } else {
+        state.hasMore = false
+      }
     },
     clearResult: (state) => {
       state.result = []
+      state.page = 1
+      state.hasMore = true
     },
   },
 })
@@ -36,9 +46,10 @@ export const searchReducerName = searchSlice.name
 export default searchSlice.reducer
 
 // Saga
-function* prepare({ payload: { q } }: ExtractActionType<typeof searchAction>) {
+function* prepare({ payload: { q, page } }: ExtractActionType<typeof searchAction>) {
   return {
     q,
+    page,
   }
 }
 

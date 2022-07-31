@@ -17,5 +17,5 @@ export const Wrapper = styled.View`
 
 export const Icon = styled(FitImage)`
   width: 40px;
-  border-radius: 5;
+  border-radius: 5px;
 `

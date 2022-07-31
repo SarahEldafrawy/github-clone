@@ -1,5 +1,6 @@
 export interface IServerSearchParams {
   q: string
+  page: number
 }
 
 export interface IServerSearchPayload {

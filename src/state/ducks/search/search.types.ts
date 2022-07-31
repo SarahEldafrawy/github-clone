@@ -16,4 +16,6 @@ export interface ISearchState {
     login: string
     avatarUrl: string
   }>
+  hasMore: boolean
+  page: number
 }
