@@ -15,7 +15,7 @@ export const Wrapper = styled.View`
   height: 70px;
 `
 
-export const Icon = styled(FitImage)`
+export const Icon = styled(FitImage)<{ rounded: boolean }>`
   width: 40px;
-  border-radius: 5px;
+  border-radius: ${(props) => (props.rounded ? "20px" : "5px")};
 `

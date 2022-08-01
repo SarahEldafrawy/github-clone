@@ -6,7 +6,19 @@ import { R } from "@github/res"
 import { AppRoute } from "@github/navigation/routes"
 import { SearchNavigation } from "@github/navigation/root-navigator"
 import { IHomeProps } from "./home.props"
-import { Wrapper, StyledContainer, StyledText, TextContainer, Options } from "./home.styles"
+import {
+  Wrapper,
+  StyledContainer,
+  StyledText,
+  TextContainer,
+  Options,
+  ButtonText,
+  ButtonTextSelected,
+  Footer,
+  StyledButton,
+  Icon,
+  StyledDescription,
+} from "./home.styles"
 import { SearchBar, Card } from "./components"
 
 const optionsData = [
@@ -26,28 +38,27 @@ const Home = ({ navigation }: IHomeProps): JSX.Element => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <>
-        <Wrapper>
-          <StatusBar preset="primary" contentPreset="light-content" />
-          <SearchBar
-            text={text}
-            setText={setText}
-            isSearchOpen={isSearchOpen}
-            setIsSearchOpen={setSearchOpen}
-          />
-          <StyledContainer>
-            {isSearchOpen && text.length === 0 && (
-              <TextContainer>
-                <StyledText bolded>{R.string.home.descriptionTitle}</StyledText>
-                <Spacer />
-                <StyledText>{R.string.home.description}</StyledText>
-              </TextContainer>
-            )}
-          </StyledContainer>
-        </Wrapper>
+      <Wrapper>
+        <StatusBar preset="primary" contentPreset="light-content" />
+        <SearchBar
+          text={text}
+          setText={setText}
+          isSearchOpen={isSearchOpen}
+          setIsSearchOpen={setSearchOpen}
+        />
+        <StyledContainer>
+          {isSearchOpen && text.length === 0 && (
+            <TextContainer>
+              <StyledText bolded>{R.string.home.descriptionTitle}</StyledText>
+              <Spacer />
+              <StyledDescription>{R.string.home.description}</StyledDescription>
+            </TextContainer>
+          )}
+        </StyledContainer>
         {text.length !== 0 && (
           <Options>
             <FlatList
+              keyboardShouldPersistTaps="handled"
               data={optionsData.map((elem) => ({
                 ...elem,
                 text,
@@ -62,7 +73,17 @@ const Home = ({ navigation }: IHomeProps): JSX.Element => {
             />
           </Options>
         )}
-      </>
+        <Footer>
+          <StyledButton>
+            <Icon source={R.image.home} />
+            <ButtonTextSelected>Home</ButtonTextSelected>
+          </StyledButton>
+          <StyledButton>
+            <Icon source={R.image.people} />
+            <ButtonText>Profile</ButtonText>
+          </StyledButton>
+        </Footer>
+      </Wrapper>
     </TouchableWithoutFeedback>
   )
 }

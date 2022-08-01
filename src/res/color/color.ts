@@ -8,12 +8,15 @@ export default class AppColor {
   public home = {
     background: palette.black.base,
     text: palette.white.base,
+    buttonTextSelected: palette.blue.base,
+    buttonText: palette.white.base,
   }
 
   public search = {
     background: palette.black.smoke,
     text: palette.white.base,
     placeholder: palette.grey.base,
+    spinner: palette.blue.base,
   }
 
   public activityIndicator = palette.white.base

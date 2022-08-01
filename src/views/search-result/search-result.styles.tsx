@@ -9,3 +9,10 @@ export const Wrapper = styled(Container)`
 export const StyledView = styled.View`
   flex: 1;
 `
+
+export const ActivityIndicatorWrapper = styled.View`
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 80px;
+`

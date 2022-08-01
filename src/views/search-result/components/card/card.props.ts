@@ -4,4 +4,5 @@ export interface ICardProps {
   bio: string
   login: string
   avatarUrl: string
+  rounded: boolean
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { FlatList } from "react-native"
+import { FlatList, ActivityIndicator } from "react-native"
+import { R } from "@github/res"
 import { StatusBar } from "@github-shared"
 import {
   searchAction,
@@ -13,7 +14,7 @@ import {
 } from "@github/state"
 import { SearchNavigation } from "@github/navigation/root-navigator"
 import { ISearchResultProps } from "./search-result.props"
-import { Wrapper, StyledView } from "./search-result.styles"
+import { Wrapper, StyledView, ActivityIndicatorWrapper } from "./search-result.styles"
 import { Header, Card } from "./components"
 
 const SearchResult = ({ navigation, route }: ISearchResultProps): JSX.Element => {
@@ -55,12 +56,18 @@ const SearchResult = ({ navigation, route }: ISearchResultProps): JSX.Element =>
       <StatusBar preset="primary" contentPreset="light-content" />
       <Header title={title} onPress={goBack} />
       <StyledView>
-        <FlatList
-          data={result}
-          renderItem={Card}
-          keyExtractor={(item) => item.id}
-          onEndReached={handleLoadMore}
-        />
+        {loading && result.length === 0 ? (
+          <ActivityIndicatorWrapper>
+            <ActivityIndicator size="large" color={R.color.search.spinner} />
+          </ActivityIndicatorWrapper>
+        ) : (
+          <FlatList
+            data={result.map((elem) => ({ ...elem, rounded: title === SearchNavigation.People }))}
+            renderItem={Card}
+            keyExtractor={(item) => item.id}
+            onEndReached={handleLoadMore}
+          />
+        )}
       </StyledView>
     </Wrapper>
   )

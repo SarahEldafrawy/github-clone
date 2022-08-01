@@ -61,8 +61,8 @@ function* prepare({ payload: { q, page } }: ExtractActionType<typeof searchActio
 function* postRequest(response: IResponse<ISearchPayload>) {
   if (response.ok) {
     yield put(setSearchResult(response.data))
-    yield put(setSearchLoading({ loading: false }))
   }
+  yield put(setSearchLoading({ loading: false }))
   return response
 }
 

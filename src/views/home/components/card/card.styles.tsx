@@ -1,6 +1,6 @@
 import styled from "styled-components/native"
 import { R } from "@github/res"
-import { Text, FitImage } from "@github-shared"
+import { Text, FitImage, Button } from "@github-shared"
 
 export const StyledText = styled(Text)`
   font-size: ${R.fontSize.big}px;
@@ -8,14 +8,10 @@ export const StyledText = styled(Text)`
   padding-left: 10px;
 `
 
-export const UnderlinedText = styled(Text)`
-  text-decoration: underline;
-  text-decoration-color: ${R.color.search.text};
-`
-
-export const Wrapper = styled.View`
+export const StyledButton = styled(Button)`
   flex-grow: 1;
   flex-direction: row;
+  justify-content: flex-start;
   padding: 10px 5px;
   height: 60px;
 `

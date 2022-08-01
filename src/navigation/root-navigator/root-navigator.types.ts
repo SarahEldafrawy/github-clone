@@ -4,7 +4,7 @@ import { AppRoute } from "@github/navigation/routes"
 
 export enum SearchNavigation {
   People = "People",
-  Organization = "Organization",
+  Organization = "Organizations",
 }
 
 export type IRootParamList = {
